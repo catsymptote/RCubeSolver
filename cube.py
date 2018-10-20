@@ -184,8 +184,8 @@ class Cube:
 
 
 
-cbe = Cube()
-cbe.U_slice_rotation()
-cbe.Z()
-cbe.U_slice_rotation()
-cbe.show()
+#cbe = Cube()
+#cbe.U_slice_rotation()
+#cbe.Z()
+#cbe.U_slice_rotation()
+#cbe.show()
