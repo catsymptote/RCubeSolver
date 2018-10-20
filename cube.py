@@ -20,10 +20,11 @@ class Cube:
                 print(end=" ")
                 index += 1
             print()
+        print()
 
 
     """ Cube rotations """
-    def X(self):
+    def X_cube_rotation(self):
         # tmp << Y
         tmp = self.faces[0]
 
@@ -49,7 +50,7 @@ class Cube:
         # R rotate
         self.faces[3] = self.face_rotation(self.faces[3])
 
-    def Y(self):
+    def Y_cube_rotation(self):
         # tmp << O
         tmp = self.faces[1]
 
@@ -74,7 +75,7 @@ class Cube:
         self.faces[5] = self.face_rotation(self.faces[5])
 
 
-    def Z(self):
+    def Z_cube_rotation(self):
         # tmp << Y
         tmp = self.faces[0]
 
