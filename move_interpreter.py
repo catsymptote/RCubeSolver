@@ -11,6 +11,9 @@ class Interpreter:
     cbe.show()
     # ["R", "R2", "X_", "B"]
 
+    def __init__(self):
+        cbe = cube.Cube()
+
     def add_moves(self, moves):
         for move in moves:
             self.translate_move(move)
@@ -91,5 +94,12 @@ class Interpreter:
 
 intp = Interpreter()
 
-intp.add_moves(["R", "U", "R_", "U_"])
+for i in range(130):
+    intp.add_moves(["U", "R"])
+    if intp.cbe.is_complete():
+        print("Complete after", i+1, "runs.")
+        #break
+
+print()
 intp.cbe.show()
+intp.cbe.altshow()

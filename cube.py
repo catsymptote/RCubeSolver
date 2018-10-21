@@ -1,17 +1,55 @@
 
 
 class Cube:
-    faces = [
-        ["Y"]*9,   # U, 0
-        ["O"]*9,   # L, 1
-        ["B"]*9,   # F, 2
-        ["R"]*9,   # R, 3
-        ["G"]*9,   # B, 4
-        ["W"]*9    # D, 5
-    ]
+    faces = []
+    orig_faces = []
+
+
+    def __init__(self):
+        self.faces = [
+            ["Y"]*9,   # U, 0
+            ["O"]*9,   # L, 1
+            ["B"]*9,   # F, 2
+            ["R"]*9,   # R, 3
+            ["G"]*9,   # B, 4
+            ["W"]*9    # D, 5
+        ]
+
+        self.orig_faces = [
+            ["Y"]*9,   # U, 0
+            ["O"]*9,   # L, 1
+            ["B"]*9,   # F, 2
+            ["R"]*9,   # R, 3
+            ["G"]*9,   # B, 4
+            ["W"]*9    # D, 5
+        ]
+
+
+    def is_complete(self):
+        #for i in range(len(self.faces)):
+        #    for j in range(len(self.faces[i])):
+        #        if self.faces[i][j] != self.orig_faces[i][j]:
+        #            return False
+        #return True
+        if self.faces == self.orig_faces:
+            return True
+        return False
+
 
     def show(self):
         for face in self.faces:
+            index = 0
+            for sticker in face:
+                print(sticker, end="")
+                if((index+1)%3==0):
+                    print(end=" ")
+                print(end=" ")
+                index += 1
+            print()
+        print()
+
+    def altshow(self):
+        for face in self.orig_faces:
             index = 0
             for sticker in face:
                 print(sticker, end="")
@@ -73,7 +111,6 @@ class Cube:
         self.faces[5] = self.face_rotation(self.faces[5])
         self.faces[5] = self.face_rotation(self.faces[5])
         self.faces[5] = self.face_rotation(self.faces[5])
-
 
     def Z_cube_rotation(self):
         # tmp << Y
@@ -144,7 +181,6 @@ class Cube:
         self.faces[4][idx1] = tmp1
         self.faces[4][idx2] = tmp2
 
-
     def face_rotation(self, face):
         tmpList = face[:]
 
@@ -161,7 +197,6 @@ class Cube:
         face[8] = tmpList[2]
 
         return face
-
 
     def face_flip(self, face):
         tmpList = face[:]
