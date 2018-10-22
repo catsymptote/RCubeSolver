@@ -10,13 +10,33 @@ class Interpreter:
     cbe = cube.Cube()
     cbe.show()
     # ["R", "R2", "X_", "B"]
+    modifiers = "_2"
+    move_chars = "UuRrFfLlBbDdMmEeSsXYZ"
+
 
     def __init__(self):
         cbe = cube.Cube()
 
+
     def add_moves(self, moves):
         for move in moves:
             self.translate_move(move)
+
+
+    def add_str_moves(self, moves):
+        index = 0
+        #print(len(moves))
+        while index < len(moves):
+            move = moves[index]
+            if index + 1 < len(moves):
+                #print("xxx")
+                if moves[index + 1] in self.modifiers:
+                    move += moves[index + 1]
+                    index += 1
+            index += 1
+            #print(move)
+            self.translate_move(move)
+
 
     def translate_move(self, move):
         # Modifier (2 or _)
@@ -92,14 +112,22 @@ class Interpreter:
                 self.translate_move("B")
                 self.translate_move("S_")
 
+
 intp = Interpreter()
 
-for i in range(130):
-    intp.add_moves(["U", "R"])
-    if intp.cbe.is_complete():
-        print("Complete after", i+1, "runs.")
-        #break
+#moves = ["R", "U", "X", "d"]
+moves = "RUR_URU2R_"
+intp.add_str_moves(moves)
+runs = 1
+while (not intp.cbe.is_complete()):
+    intp.add_str_moves(moves)
+    runs += 1
+    if(runs > 10000 - 1):
+        print("Cutoff over", 10000)
+        break
+print("Complete after", runs, "runs.")
+
 
 print()
 intp.cbe.show()
-intp.cbe.altshow()
+#intp.cbe.altshow()

@@ -49,6 +49,7 @@ class Cube:
         print()
 
     def altshow(self):
+        """ For debug purposes only! Used for self.orig_faces. """
         for face in self.orig_faces:
             index = 0
             for sticker in face:
