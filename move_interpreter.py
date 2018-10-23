@@ -116,7 +116,7 @@ class Interpreter:
 intp = Interpreter()
 
 #moves = ["R", "U", "X", "d"]
-moves = "RUR_URU2R_"
+moves = "RU"
 intp.add_str_moves(moves)
 runs = 1
 while (not intp.cbe.is_complete()):
