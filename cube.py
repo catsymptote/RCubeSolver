@@ -37,6 +37,40 @@ class Cube:
 
 
     def show(self):
+        #print(self.faces)
+        # print Y
+        # print O-B-R-G x3
+        # print w
+        # Print Y
+        for i in range(len(self.faces[0])):
+            if (i)%3==0:
+                for j in range(2):
+                    print(end="\t")
+            print(self.faces[0][i], end=" ")
+            if (i+1)%3==0:
+                print()
+        print()
+
+
+        for k in range(3):
+            for i in range(4):
+                for j in range(3):
+                    print(self.faces[i+1][j+k*3], end=" ")
+                print(end="\t")
+            print()
+        print()
+
+        for i in range(len(self.faces[0])):
+            if (i)%3==0:
+                for j in range(2):
+                    print(end="\t")
+            print(self.faces[5][i], end=" ")
+            if (i+1)%3==0:
+                print()
+        print()
+        print()
+
+    def simple_show(self):
         for face in self.faces:
             index = 0
             for sticker in face:

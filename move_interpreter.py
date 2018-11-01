@@ -115,19 +115,22 @@ class Interpreter:
 
 intp = Interpreter()
 
-#moves = ["R", "U", "X", "d"]
-moves = "RU"
+#moves = ["R", "U", "R_", "U_"]
+moves = "RUR_U_"
 intp.add_str_moves(moves)
 runs = 1
+max_runs = 1000
 while (not intp.cbe.is_complete()):
     intp.add_str_moves(moves)
     runs += 1
-    if(runs > 10000 - 1):
-        print("Cutoff over", 10000)
+    if(runs > max_runs - 1):
+        print("Cutoff over", max_runs)
         break
+    intp.cbe.show()
 print("Complete after", runs, "runs.")
 
 
 print()
 intp.cbe.show()
+intp.cbe.simple_show()
 #intp.cbe.altshow()
