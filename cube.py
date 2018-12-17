@@ -1,3 +1,4 @@
+from block import Block
 
 
 class Cube:
@@ -23,6 +24,34 @@ class Cube:
             ["G"]*9,   # B, 4
             ["W"]*9    # D, 5
         ]
+
+
+    def list_equality(self, a, b):
+        a.sort()
+        b.sort()
+        return a == b
+
+
+    def get_block(self, sticker):
+        # Uppercase letters -> corner stickers.
+        # Lowercase letters -> edge stickers.
+        # Center stickers are not lettered.
+        blk = Block()
+        if      sticker == "A":
+            #a = self.faces[0][0]
+            #b = self.faces[1][0]
+            #c = self.faces[4][2]
+            #tmp = [a, b, c]
+            blk.construct(0, [
+                self.faces[0][0],
+                self.faces[1][0],
+                self.faces[4][2]
+            ])
+        return blk
+    # Pretty much copy the if (elif) above x 54. -_-
+
+
+
 
 
     def is_complete(self):

@@ -134,3 +134,7 @@ print()
 intp.cbe.show()
 intp.cbe.simple_show()
 #intp.cbe.altshow()
+
+print("---")
+print(intp.cbe.get_block("A").get_stickers())
+print("---")
