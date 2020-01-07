@@ -281,11 +281,3 @@ class Cube:
         """
 
         return face
-
-
-
-#cbe = Cube()
-#cbe.U_slice_rotation()
-#cbe.Z()
-#cbe.U_slice_rotation()
-#cbe.show()
