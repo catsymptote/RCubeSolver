@@ -1,5 +1,12 @@
+# IDEs
 .idea/
 venv/
-__pycache__
+.vscode/
+
+# Python
+__pycache__/
 *.pyc
+
+# OS files
 .DS_Store
+*.db
