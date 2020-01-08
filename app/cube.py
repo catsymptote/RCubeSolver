@@ -1,9 +1,14 @@
-from block import Block
+from .block import Block
 
 
 class Cube:
-    faces = []
-    orig_faces = []
+    sticker_code_register = {
+            # _ : (f1, s1, f2, s2, f3, s3 ), where f is face and s is sticker.
+            # 1->2->3 should be ordered by clockwise rotation around the cube.
+            # 1 (in both corners and edges) should always be the relevant sticker.
+            'A' : (0, 0, 1, 0, 4, 2),
+            'B' : (0, 2, 4, 0, 3, 2)
+        }
 
 
     def __init__(self):
@@ -16,6 +21,7 @@ class Cube:
             ["W"]*9    # D, 5
         ]
 
+        # Should do a deepcopy of original self.faces instead of this.
         self.orig_faces = [
             ["Y"]*9,   # U, 0
             ["O"]*9,   # L, 1
@@ -27,28 +33,46 @@ class Cube:
 
 
     def list_equality(self, a, b):
+        """Check if two lists are equal,in that they have
+        the same values, but not necessarily in order."""
         a.sort()
         b.sort()
-        return a == b
+        if len(a) != len(b) or type(a) != type(b):
+            return False
+        for i in range(len(a)):
+            if a[i] != b[i] or type(a) != type(b):
+                return False
+        return True
 
 
     def get_block(self, sticker):
-        # Uppercase letters -> corner stickers.
-        # Lowercase letters -> edge stickers.
-        # Center stickers are not lettered.
-        blk = Block()
-        if      sticker == "A":
+        """Return the block/piece based on the sticker code.
+        The codes are 'A' -> 'X', both upper- and lowercase.
+        * Uppercase letters -> corner stickers.
+        * Lowercase letters -> edge stickers.
+        * Center stickers are not lettered."""
+        
+        if sticker in Cube.sticker_code_register:
+            pos = Cube.sticker_code_register[sticker]
+            block_stickers = []
+            for i in range(0, len(pos), 2):
+                block_stickers.append(self.faces[pos[i]][pos[i+1]])
+
+            blk = Block(block_stickers)
+            return blk
+        return None
+        #if sticker == "A":
             #a = self.faces[0][0]
             #b = self.faces[1][0]
             #c = self.faces[4][2]
             #tmp = [a, b, c]
-            blk.construct(0, [
-                self.faces[0][0],
-                self.faces[1][0],
-                self.faces[4][2]
-            ])
-        return blk
-    # Pretty much copy the if (elif) above x 54. -_-
+            #blk.construct(0, [
+            #    self.faces[0][0],
+            #    self.faces[1][0],
+            #    self.faces[4][2]
+            #])
+        #    block.construct()
+        #return blk
 
 
 
@@ -99,6 +123,7 @@ class Cube:
         print()
         print()
 
+
     def simple_show(self):
         for face in self.faces:
             index = 0
@@ -110,6 +135,7 @@ class Cube:
                 index += 1
             print()
         print()
+
 
     def altshow(self):
         """ For debug purposes only! Used for self.orig_faces. """
@@ -152,6 +178,7 @@ class Cube:
         # R rotate
         self.faces[3] = self.face_rotation(self.faces[3])
 
+
     def Y_cube_rotation(self):
         # tmp << O
         tmp = self.faces[1]
@@ -175,6 +202,7 @@ class Cube:
         self.faces[5] = self.face_rotation(self.faces[5])
         self.faces[5] = self.face_rotation(self.faces[5])
         self.faces[5] = self.face_rotation(self.faces[5])
+
 
     def Z_cube_rotation(self):
         # tmp << Y
@@ -204,6 +232,7 @@ class Cube:
         self.faces[4] = self.face_rotation(self.faces[4])
         self.faces[4] = self.face_rotation(self.faces[4])
 
+
     def U_slice_rotation(self):
         # Yellow face
         self.faces[0] = self.face_rotation(self.faces[0])
@@ -211,10 +240,12 @@ class Cube:
         # Other faces
         self.outer_slice_rotation()
 
+
     def E_slice_rotation(self):
         self.outer_slice_rotation(1)
         self.outer_slice_rotation(1)
         self.outer_slice_rotation(1)
+
 
     def outer_slice_rotation(self, modifier=0):
         idx0 = 0 + modifier*3
@@ -245,6 +276,7 @@ class Cube:
         self.faces[4][idx1] = tmp1
         self.faces[4][idx2] = tmp2
 
+
     def face_rotation(self, face):
         tmpList = face[:]
 
@@ -261,6 +293,7 @@ class Cube:
         face[8] = tmpList[2]
 
         return face
+
 
     def face_flip(self, face):
         tmpList = face[:]
@@ -279,5 +312,4 @@ class Cube:
         face[7] = tmpList[1]
         face[8] = tmpList[0]
         """
-
         return face
