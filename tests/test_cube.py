@@ -1,6 +1,7 @@
 from app.cube import Cube
 from app.block import Block
 
+
 def test_cube():
     c = Cube()
 
@@ -32,9 +33,6 @@ def test_get_block():
     assert type(b) is Block
     assert b.block_type == 'corner'
     assert b.stickers == ['Y', 'G', 'R']
-
-    
-    
 
 
 def test_is_complete():

@@ -3,12 +3,17 @@ from .block import Block
 
 class Cube:
     sticker_code_register = {
-            # _ : (f1, s1, f2, s2, f3, s3 ), where f is face and s is sticker.
-            # 1->2->3 should be ordered by clockwise rotation around the cube.
-            # 1 (in both corners and edges) should always be the relevant sticker.
-            'A' : (0, 0, 1, 0, 4, 2),
-            'B' : (0, 2, 4, 0, 3, 2)
-        }
+        # _ : (f1, s1, f2, s2, f3, s3 ), where f is face and s is sticker.
+        # 1->2->3 should be ordered by clockwise rotation around the cube.
+        # 1 (in both corners and edges) should always be the relevant sticker.
+        'A' : (0, 0, 1, 0, 4, 2),
+        'B' : (0, 2, 4, 0, 3, 2),
+        'C' : (0, 4, 3, 0, 2, 2),
+        'D' : (0, 6, 2, 0, 1, 2),
+        'E' : (1, 0, 4, 2, 0, 0),
+        'F' : (1, 2, 0, 6, 2, 0),
+        'G' : (1, 4, 2, 6, 5, 0)
+    }
 
 
     def __init__(self):

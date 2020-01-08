@@ -1,14 +1,23 @@
 class Block:
-    def __init__(self, stickers):
+    letter_code = {
+        'YOG' : 'A',
+        'YGR' : 'B',
+        'YRB' : 'C',
+        'YBO' : 'D'
+    }
+    
+
+    def __init__(self, stickers:list):
         self.stickers = stickers
         
         self.block_type = None
+
         if len(stickers) == 3:
             self.block_type = 'corner'
         elif len(stickers) == 2:
             self.block_type = 'edge'
         else:
-            self.block_type == 'center'
+            self.block_type = 'center'
     
 
     def construct(self, type, stickers):
@@ -26,5 +35,10 @@ class Block:
 
     def get_name(self):
         name = ''
-        for sticker in stickers:
+        for sticker in self.stickers:
             name += sticker
+        return name
+
+
+    def get_letter(self):
+        return Block.letter_code[self.get_letter()]
