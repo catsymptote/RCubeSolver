@@ -10,7 +10,7 @@ algs = {
 
 
 def parse_alg(alg:str)
-    "Replaces ' with _, and removes spaces."
+    """Replaces ' with _, and removes spaces."""
     alg.replace("'", "_", 100)
     alg.replace(' ()', '', 100)
     return alg
