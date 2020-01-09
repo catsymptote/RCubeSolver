@@ -1,4 +1,5 @@
 from .move_interpreter import Interpreter
+from .cube import Cube
 
 
 algs = {
@@ -28,7 +29,31 @@ class Pochmann:
 
     def get_moves(cube:Cube):
         """Get the moves needed to solve the cube."""
-        pass
+        alg_count = 0
+        full_solve = ''
+        buffer_piece = 'b'
+        piece = None
+        # edge
+        while not cube.is_complete():
+            if edges_complete(cube):
+                buffer_piece = 'A'
+                if alg_count%2 == 1:
+                    # This may be the wrong alg.
+                    full_solve += algs['J_b_perm']
+                continue
+            piece = cube.get_block(buffer_piece)
+            target = piece.get_letter()
+            setup = cls.setup[target]
+
+            alg = ''
+            alg += setup
+            alg += self.choose_alg(target)
+            alg += self.reverse(setup[)
+
+            full_solve += alg
+            alg_count += 1
+
+        return full_solve
 
 
     def choose_alg(self, letter:str):
