@@ -31,7 +31,7 @@ class Pochmann:
         pass
 
 
-    def chose_alg(self, letter:str):
+    def choose_alg(self, letter:str):
         """Chose alg. Atm, only T- or Y-perm is used, and edge setup
         is somewhat complicated. Can (and maybe should) be updated
         with J-perms, and a more proper/normal setup."""
