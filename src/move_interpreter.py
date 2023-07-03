@@ -1,5 +1,5 @@
-from cube import Cube
-from move_translator import MoveTranslator
+from src.cube import Cube
+from src.move_translator import MoveTranslator
 
 # cbe = cube.Cube()
 # cbe.U_slice_rotation()

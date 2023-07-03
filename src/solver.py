@@ -1,5 +1,5 @@
-from pochmann import Pochmann
-from cube import Cube
+from src.pochmann import Pochmann
+from src.cube import Cube
 
 
 class Solver:

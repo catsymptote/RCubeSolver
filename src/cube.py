@@ -1,6 +1,6 @@
 import copy
 
-from block import Block
+from src.block import Block
 
 
 class Cube:

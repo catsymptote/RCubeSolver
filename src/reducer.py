@@ -79,19 +79,3 @@ class Reducer:
 
     def get_moves(self):
         return self.moves
-
-
-def test_reducer():
-    moves = ["R", "U", "R", "U", "R", "R'", "U"]
-    expected_moves = ["R", "U", "R", "U2"]
-
-    red = Reducer(moves)
-    red.reduce()
-    resulting_moves = red.get_moves()
-
-    assert expected_moves == resulting_moves, f"{expected_moves}\n{resulting_moves}"
-    print("Success!")
-
-
-if __name__ == "__main__":
-    test_reducer()

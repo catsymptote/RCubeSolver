@@ -41,16 +41,3 @@ class MoveTranslator:
 
             index += 1
         return moves
-
-
-def test():
-    mt = MoveTranslator()
-    moves = ["M", "R"]
-    expected = ["Z_", "E", "Z", "Z_", "U", "Z"]
-    result = mt.translate(moves)
-    assert result == expected, f"{expected}\n{result}"
-    print("Success!")
-
-
-if __name__ == "__main__":
-    test()

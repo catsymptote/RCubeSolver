@@ -18,17 +18,3 @@ class AlgConverter:
 
         moves = alg.split()
         return moves
-
-
-def test():
-    ac = AlgConverter()
-    alg = "(R U R' U') R U"
-    expected = ["R", "U", "R'", "U'", "R", "U"]
-    ac = AlgConverter()
-    result = ac.convert(alg)
-    assert expected == result, f"\n{expected}\n{result}"
-    print("Success!")
-
-
-if __name__ == "__main__":
-    test()

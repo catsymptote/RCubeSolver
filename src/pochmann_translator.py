@@ -15,7 +15,7 @@ Permutations
     P: R (parity)
 """
 
-from alg_lookup import AlgLookup
+from src.alg_lookup import AlgLookup
 
 
 class PochmannTranslator:
@@ -48,19 +48,3 @@ class PochmannTranslator:
 
         moves = setup + self.alg_lookup.get(alg) + teardown
         return moves
-
-
-def test():
-    pt = PochmannTranslator()
-    expected = [
-        "L", "D'", "L",
-        "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'",
-        "L'", "D", "L'",
-    ]
-    result = pt.translate("E")
-    assert expected == result, f"\n{expected}\n{result}"
-    print("Success!")
-
-
-if __name__ == "__main__":
-    test()

@@ -1,4 +1,4 @@
-from move_interpreter import Interpreter
+from src.move_interpreter import Interpreter
 
 
 intp = Interpreter()
