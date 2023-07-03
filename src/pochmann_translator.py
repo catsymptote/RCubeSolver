@@ -1,4 +1,4 @@
-'''
+"""
 Lookup table structure:
     position: (setup, permutation)
 
@@ -13,7 +13,7 @@ Permutations
     Y: p
 
     P: R (parity)
-'''
+"""
 
 from alg_lookup import AlgLookup
 
@@ -22,11 +22,11 @@ class PochmannTranslator:
     def __init__(self):
         self.alg_lookup = AlgLookup()
         self.setup_moves = {
-            'A': ([], 'Ja'),
-            'B': ([], 0),
-            'C': ([], 'Jb'),
-            'D': ([], 'T'),
-            'E': (['L', "D'", 'L'], 'T'),
+            "A": ([], "Ja"),
+            "B": ([], 0),
+            "C": ([], "Jb"),
+            "D": ([], "T"),
+            "E": (["L", "D'", "L"], "T"),
         }
 
     def single_invert(self, move):
@@ -52,14 +52,15 @@ class PochmannTranslator:
 
 def test():
     pt = PochmannTranslator()
-    expected = ["L", "D'", "L",
-                "R", "U", "R'", "U'", "R'", "F", "R2", "U'",
-                    "R'", "U'", "R", "U", "R'", "F'",
-                "L'", "D", "L'"]
-    result = pt.translate('E')
-    assert expected == result, f'\n{expected}\n{result}'
-    print('Success!')
+    expected = [
+        "L", "D'", "L",
+        "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'",
+        "L'", "D", "L'",
+    ]
+    result = pt.translate("E")
+    assert expected == result, f"\n{expected}\n{result}"
+    print("Success!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test()

@@ -3,28 +3,26 @@ class MoveTranslator:
         self.lookup = {
             # Single slices
             # 'U': ['U'],  # Don't include here
-            'D': ['X2', 'U', 'X2'],
-            'R': ['Z_', 'U', 'Z'],
-            'L': ['Z', 'U', 'Z_'],
-            'F': ['X', 'U', 'X_'],
-            'B': ['X_', 'U', 'X'],
-
+            "D": ["X2", "U", "X2"],
+            "R": ["Z_", "U", "Z"],
+            "L": ["Z", "U", "Z_"],
+            "F": ["X", "U", "X_"],
+            "B": ["X_", "U", "X"],
             # Mid-slices
             # 'E': ['E'],  # Don't include here
-            'M': ['Z_', 'E', 'Z'],
-            'S': ['X', 'E', 'X_'],
-
+            "M": ["Z_", "E", "Z"],
+            "S": ["X", "E", "X_"],
             # Double slices
-            'u': ['U', 'E_'],
-            'd': ['D', 'E'], # or the other way around? (E and E_.)
-            'r': ['R', 'M_'],
-            'l': ['L', 'M'],
-            'f': ['F', 'S'],
-            'b': ['B', 'S_']
+            "u": ["U", "E_"],
+            "d": ["D", "E"],  # or the other way around? (E and E_.)
+            "r": ["R", "M_"],
+            "l": ["L", "M"],
+            "f": ["F", "S"],
+            "b": ["B", "S_"],
         }
 
     def translate(self, moves: list[str]) -> list[str]:
-        base_moves = 'XYZUE'
+        base_moves = "XYZUE"
         index = 0
         while index < len(moves):
             move = moves[index]
@@ -37,7 +35,7 @@ class MoveTranslator:
             # Move translation
             insert_moves = self.lookup.get(move, None)
             if insert_moves:
-                moves[index:index + 1] = insert_moves[:]
+                moves[index : index + 1] = insert_moves[:]
                 index += len(insert_moves)
                 continue
 
@@ -47,12 +45,12 @@ class MoveTranslator:
 
 def test():
     mt = MoveTranslator()
-    moves = ['M', 'R']
-    expected = ['Z_', 'E', 'Z', 'Z_', 'U', 'Z']
+    moves = ["M", "R"]
+    expected = ["Z_", "E", "Z", "Z_", "U", "Z"]
     result = mt.translate(moves)
-    assert result == expected, f'{expected}\n{result}'
-    print('Success!')
+    assert result == expected, f"{expected}\n{result}"
+    print("Success!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test()

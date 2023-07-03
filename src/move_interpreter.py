@@ -58,9 +58,9 @@ class Interpreter:
                 self.cbe.Y_cube_rotation()
             elif move == "Z":
                 self.cbe.Z_cube_rotation()
-            
+
             # Single slices
-            elif move == 'U':
+            elif move == "U":
                 self.cbe.U_slice_rotation()
-            elif move == 'E':
+            elif move == "E":
                 self.cbe.E_slice_rotation()
