@@ -1,5 +1,6 @@
-from src.move_interpreter import Interpreter
-from src.cube import Cube
+from move_interpreter import Interpreter
+from cube import Cube
+from pochmann_translator import PochmannTranslator
 
 
 algs = {
@@ -18,7 +19,8 @@ def parse_alg(alg: str):
 
 
 class Pochmann:
-    setup = {"a": "...", "b": "...", "c": "...", "d": "", "e": "LE_L"}
+    def __init__(self):
+        self.translator = PochmannTranslator()
 
     def get_moves(cube: Cube):
         """Get the moves needed to solve the cube."""
@@ -36,7 +38,7 @@ class Pochmann:
                 continue
             piece = cube.get_block(buffer_piece)
             target = piece.get_letter()
-            setup = cls.setup[target]
+            setup = Pochmann.setup[target]
 
             alg = ""
             alg += setup

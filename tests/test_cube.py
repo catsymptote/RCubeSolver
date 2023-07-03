@@ -1,5 +1,5 @@
-from app.cube import Cube
-from app.block import Block
+from src.cube import Cube
+from src.block import Block
 
 
 def test_cube():
@@ -14,7 +14,7 @@ def test_cube():
     assert len(c.faces[0]) == 9
 
     assert type(c.faces[0][0]) is str
-    assert c.faces[0][0] == 'Y'
+    assert c.faces[0][0] == "Y"
 
 
 def test_list_equality():
@@ -23,22 +23,22 @@ def test_list_equality():
 
 def test_get_block():
     c = Cube()
-    a = c.get_block('A')
-    b = c.get_block('B')
-    
+    a = c.get_block("A")
+    b = c.get_block("B")
+
     assert type(a) is Block
-    assert a.block_type == 'corner'
-    assert a.stickers == ['Y', 'O', 'G']
+    assert a.block_type == "corner"
+    assert a.stickers == ["Y", "O", "G"]
 
     assert type(b) is Block
-    assert b.block_type == 'corner'
-    assert b.stickers == ['Y', 'G', 'R']
+    assert b.block_type == "corner"
+    assert b.stickers == ["Y", "G", "R"]
 
 
 def test_is_complete():
     c = Cube()
     assert c.is_complete()
-    c.faces[0][0] = 'O'
+    c.faces[0][0] = "O"
     assert not c.is_complete()
 
 
@@ -51,10 +51,6 @@ def test_simple_show():
 
 
 def test_altshow():
-    pass
-
-
-def test_simple_show():
     pass
 
 
