@@ -6,14 +6,14 @@ https://www.rubiksplace.com/speedcubing/PLL-algorithms/
 
 class AlgLookup:
     def __init__(self):
-        self.str_lookup: dict = {
+        self.str_lookup: dict[str, str] = {
             "T": "(R U R' U') R' F R2 (U' R' U' R) U R' F'",
             "Ja": "[R' U L'] U2 [R U' R' U2] [L R U']",
             "Jb": "[R U R' F'] [R U R' U' R' F] [R2 U' R' U']",
             # 'Y': "[F R U' R' U' R U R' F'] [R U R' U'] [R' F R F']"
             "Yb": "[R U' R' U' R U R' F'] [R U R' U'] [R' F R]",
         }
-        self.list_lookup = {}
+        self.list_lookup: dict[str, list[str]] = {}
         for perm, alg in self.str_lookup.items():
             self.list_lookup[perm] = self.convert(alg)
 

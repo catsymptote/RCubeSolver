@@ -23,7 +23,7 @@ class PochmannTranslator:
         self.alg_lookup = AlgLookup()
         self.setup_moves = {
             "A": ([], "Ja"),
-            "B": ([], 0),
+            "B": ([], None),
             "C": ([], "Jb"),
             "D": ([], "T"),
             "E": (["L", "D'", "L"], "T"),
