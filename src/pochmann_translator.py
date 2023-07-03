@@ -46,5 +46,5 @@ class PochmannTranslator:
         setup, alg = self.setup_moves[letter]
         teardown = self.invert(setup)
 
-        moves = setup + self.alg_lookup.get(alg) + teardown
+        moves = setup + self.alg_lookup.get_list(alg) + teardown
         return moves
