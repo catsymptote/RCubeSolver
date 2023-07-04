@@ -61,3 +61,9 @@ Algorithms can be written in the `alg_lookup` lookup table. They can be written 
 
 Notation: Uppercase letters are edgesm while lowercase letters are corners.
 Edge buffer is `B` and corner buffer is `a`.
+
+## Technical
+
+### Printing
+We use `colorama` to print the cube with ANSI colors. One can choose to color the background or the foreground.
+["Source"](https://stackoverflow.com/questions/54587206/how-to-change-python-background-to-a-certain-colour-with-colorama).

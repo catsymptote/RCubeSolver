@@ -8,7 +8,7 @@ cube = CubeInterface()
 
 print('### New cube')
 print('Solved:', cube.is_complete())
-print(cube.show())
+cube.show()
 
 # Scramble cube
 scrambler = Scrambler(cube)
@@ -16,7 +16,7 @@ cube = scrambler.scramble()
 
 print('### Scrabmled cube')
 print('Solved:', cube.is_complete())
-print(cube.show())
+cube.show()
 
 # Find solution
 solver = PochmannSolver(cube)
@@ -27,4 +27,4 @@ cube.apply_moves(moves)
 
 print('### Solved cube')
 print('Solved:', cube.is_complete())
-print(cube.show())
+cube.show()

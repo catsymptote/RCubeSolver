@@ -1,20 +1,28 @@
-from termcolor import colored
+from colorama import init as colorama_init
+from colorama import Back, Fore, Style
 
 
 class CubePrinter:
-    def __init__(self, cube):
+    def __init__(self, cube, background=False):
+        # Initialze colorama
+        colorama_init()
+
+        # Decide whether to color background or foreground
+        ground = Back if background else Fore
+
         self.color_lookup = {
-            'Y': 'yellow',
-            'O': 'orange',
-            'B': 'blue',
-            'R': 'red',
-            'G': 'green',
-            'W': 'white'
+            'Y': ground.YELLOW,
+            'O': ground.MAGENTA,  # Change later
+            'B': ground.BLUE,
+            'R': ground.RED,
+            'G': ground.GREEN,
+            'W': ground.WHITE
         }
         self.cube = cube
 
-    def get_color(self, sticker):
-        return self.color_lookup[sticker]
+    def print_sticker(self, sticker, addon: str = ''):
+        color = self.color_lookup[sticker]
+        print(f'{color}{sticker}{Style.RESET_ALL}', end=addon)
 
     def show(self):
         for i in range(len(self.cube.faces[0])):
@@ -22,8 +30,7 @@ class CubePrinter:
                 for j in range(2):
                     print(end="\t")
             sticker = self.cube.faces[0][i]
-            color = self.get_color(sticker)
-            print(colored(sticker), end=" ")
+            self.print_sticker(sticker)
             if (i + 1) % 3 == 0:
                 print()
         print()
@@ -32,8 +39,7 @@ class CubePrinter:
             for i in range(4):
                 for j in range(3):
                     sticker = self.cube.faces[i + 1][j + k * 3]
-                    color = self.get_color(sticker)
-                    print(colored(sticker), end=" ")
+                    self.print_sticker(sticker)
                 print(end="\t")
             print()
         print()
@@ -43,8 +49,7 @@ class CubePrinter:
                 for j in range(2):
                     print(end="\t")
             sticker = self.cube.faces[5][i]
-            color = self.get_color(sticker)
-            print(colored(sticker), end=" ")
+            self.print_sticker(sticker)
             if (i + 1) % 3 == 0:
                 print()
         print()
