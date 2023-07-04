@@ -1,7 +1,7 @@
 import copy
 
 from rcube.block import Block
-from cube_printer import CubePrinter
+from rcube.cube_printer import CubePrinter
 
 
 class Cube:
@@ -20,14 +20,27 @@ class Cube:
 
     def __init__(self):
         self.printer = CubePrinter(self)
-        self.faces = [
-            ["Y"] * 9,  # U, 0
-            ["O"] * 9,  # L, 1
-            ["B"] * 9,  # F, 2
-            ["R"] * 9,  # R, 3
-            ["G"] * 9,  # B, 4
-            ["W"] * 9,  # D, 5
-        ]
+
+        # Set faces
+
+        if self.printer.BLD_notation:
+            self.faces = [
+                ['a', 'A', 'b', 'D', '1', 'B', 'd', 'C', 'c'],
+                ['e', 'E', 'f', 'H', '2', 'F', 'h', 'G', 'g'],
+                ['i', 'I', 'j', 'L', '3', 'J', 'l', 'K', 'k'],
+                ['m', 'M', 'm', 'P', '4', 'N', 'p', 'O', 'o'],
+                ['q', 'Q', 'r', 'T', '5', 'R', 't', 'S', 's'],
+                ['u', 'U', 'u', 'X', '6', 'V', 'x', 'W', 'w']
+            ]
+        else:
+            self.faces = [
+                ["Y"] * 9,  # U, 0
+                ["O"] * 9,  # L, 1
+                ["B"] * 9,  # F, 2
+                ["R"] * 9,  # R, 3
+                ["G"] * 9,  # B, 4
+                ["W"] * 9,  # D, 5
+            ]
 
         self.orig_faces = copy.deepcopy(self.faces)
 
