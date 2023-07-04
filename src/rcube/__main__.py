@@ -1,4 +1,4 @@
-from src.move_interpreter import Interpreter
+from rcube.move_interpreter import Interpreter
 
 
 intp = Interpreter()

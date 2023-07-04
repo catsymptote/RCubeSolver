@@ -1,4 +1,4 @@
-from src.move_translator import MoveTranslator
+from rcube.move_translator import MoveTranslator
 
 
 def test_init():

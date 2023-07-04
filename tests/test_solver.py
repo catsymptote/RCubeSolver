@@ -1,4 +1,4 @@
-from src.solver import Solver
+from rcube.solver import Solver
 
 
 def test_init():

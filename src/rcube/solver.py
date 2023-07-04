@@ -1,5 +1,5 @@
-from src.pochmann import Pochmann
-from src.cube import Cube
+from rcube.pochmann import Pochmann
+from rcube.cube import Cube
 
 
 class Solver:
@@ -7,7 +7,6 @@ class Solver:
         if solver_class is None:
             solver_class = Pochmann
         self.solver_obj = solver_class()
-
 
     def perform_moves(self, scramble_moves):
         # Perform moves

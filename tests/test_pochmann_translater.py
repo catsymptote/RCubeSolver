@@ -1,4 +1,4 @@
-from src.pochmann_translator import PochmannTranslator
+from rcube.pochmann_translator import PochmannTranslator
 
 
 def test_init():

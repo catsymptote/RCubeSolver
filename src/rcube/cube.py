@@ -1,6 +1,6 @@
 import copy
 
-from src.block import Block
+from rcube.block import Block
 
 
 class Cube:

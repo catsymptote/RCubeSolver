@@ -1,4 +1,4 @@
-from src.reducer import Reducer
+from rcube.reducer import Reducer
 
 
 def test_init():

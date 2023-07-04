@@ -1,5 +1,5 @@
-from src.cube import Cube
-from src.block import Block
+from rcube.cube import Cube
+from rcube.block import Block
 
 
 def test_cube():

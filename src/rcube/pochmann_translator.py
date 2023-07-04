@@ -15,7 +15,7 @@ Permutations
     P: R (parity)
 """
 
-from src.alg_lookup import AlgLookup
+from rcube.alg_lookup import AlgLookup
 
 
 class PochmannTranslator:

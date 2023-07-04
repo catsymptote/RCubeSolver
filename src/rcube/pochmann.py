@@ -1,6 +1,6 @@
-from src.move_interpreter import Interpreter
-from src.cube import Cube
-from src.pochmann_translator import PochmannTranslator
+from rcube.move_interpreter import Interpreter
+from rcube.cube import Cube
+from rcube.pochmann_translator import PochmannTranslator
 
 
 algs = {

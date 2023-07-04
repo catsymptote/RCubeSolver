@@ -1,4 +1,4 @@
-from src.block import Block
+from rcube.block import Block
 
 
 def test_block():
