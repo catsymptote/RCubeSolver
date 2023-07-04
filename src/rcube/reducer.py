@@ -41,7 +41,8 @@ class Reducer:
         index = 0
         while index < len(self.moves) - 1:
             if self.is_same_move(self.moves[index], self.moves[index + 1]):
-                new_move = self.combine_moves(self.moves[index], self.moves[index + 1])
+                new_move = self.combine_moves(self.moves[index],
+                                              self.moves[index + 1])
                 if new_move:
                     # Modify
                     self.moves[index] = self.combine_moves(

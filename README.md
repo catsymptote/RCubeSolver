@@ -1,6 +1,6 @@
 # Rubik's Cube Solver
 
-## Info
+## Move Notation
 
 [Rubik's cube notation](https://ruwix.com/the-rubiks-cube/notation/)
 
@@ -44,8 +44,20 @@
 
 \* Though one of these can be swapped out with a of the others, so we'd really only need two of them.
 
+
+## Algorithm notation
+
+Algorithms can be written in the `alg_lookup` lookup table. They can be written in as strings (see `alg_lookup` for examples), but should always be used in the form of a list. E.g.,
+
+```python
+["R", "U", "R'", "U'"]
+```
+
 ## Methods
 
 ### Old Pochmann
 
 [More info](https://ruwix.com/the-rubiks-cube/how-to-solve-the-rubiks-cube-blindfolded-tutorial/)
+
+Notation: Uppercase letters are edgesm while lowercase letters are corners.
+Edge buffer is `B` and corner buffer is `a`.

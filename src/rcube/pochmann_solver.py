@@ -1,5 +1,4 @@
-from rcube.move_interpreter import Interpreter
-from rcube.cube import Cube
+from rcube.cube_interface import CubeInterface
 from rcube.pochmann_translator import PochmannTranslator
 
 
@@ -18,11 +17,19 @@ def parse_alg(alg: str):
     return alg
 
 
-class Pochmann:
-    def __init__(self):
+class PochmannSolver:
+    def __init__(self, cube: CubeInterface):
         self.translator = PochmannTranslator()
+        self.cube = cube
 
-    def get_moves(cube: Cube):
+    def get_moves(self):
+        return ["R", "U"]
+
+
+
+
+class OldVersionOfPochmann_KillWithFire:
+    def get_moves(cube: CubeInterface):
         """Get the moves needed to solve the cube."""
         alg_count = 0
         full_solve = ""
@@ -30,7 +37,7 @@ class Pochmann:
         piece = None
         # edge
         while not cube.is_complete():
-            if edges_complete(cube):
+            if self.edges_complete(cube):
                 buffer_piece = "A"
                 if alg_count % 2 == 1:
                     # This may be the wrong alg.
@@ -61,7 +68,8 @@ class Pochmann:
         elif letter == "cgkoq":
             return algs["J_b_perm"]
         else:
-            # b and m should do T-perm with a setup shooting to any unsolved position.
+            # b and m should do T-perm with a setup shooting to any unsolved
+            # position.
             return "T_perm"
 
     def reverse(self, alg):

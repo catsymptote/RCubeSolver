@@ -1,6 +1,7 @@
 import copy
 
 from rcube.block import Block
+from cube_printer import CubePrinter
 
 
 class Cube:
@@ -18,6 +19,7 @@ class Cube:
     }
 
     def __init__(self):
+        self.printer = CubePrinter(self)
         self.faces = [
             ["Y"] * 9,  # U, 0
             ["O"] * 9,  # L, 1
@@ -30,7 +32,7 @@ class Cube:
         self.orig_faces = copy.deepcopy(self.faces)
 
     def list_equality(self, a, b):
-        """Check if two lists are equal,in that they have
+        """Check if two lists are equal, in that they have
         the same values, but not necessarily in order."""
         a = sorted(a)
         b = sorted(b)
@@ -44,8 +46,8 @@ class Cube:
     def get_block(self, sticker):
         """Return the block/piece based on the sticker code.
         The codes are 'A' -> 'X', both upper- and lowercase.
-        * Uppercase letters -> corner stickers.
-        * Lowercase letters -> edge stickers.
+        * Uppercase letters -> edge stickers.
+        * Lowercase letters -> corner stickers.
         * Center stickers are not lettered."""
 
         if sticker in Cube.sticker_code_register:
@@ -81,37 +83,7 @@ class Cube:
         return False
 
     def show(self):
-        # print(self.faces)
-        # print Y
-        # print O-B-R-G x3
-        # print w
-        # Print Y
-        for i in range(len(self.faces[0])):
-            if (i) % 3 == 0:
-                for j in range(2):
-                    print(end="\t")
-            print(self.faces[0][i], end=" ")
-            if (i + 1) % 3 == 0:
-                print()
-        print()
-
-        for k in range(3):
-            for i in range(4):
-                for j in range(3):
-                    print(self.faces[i + 1][j + k * 3], end=" ")
-                print(end="\t")
-            print()
-        print()
-
-        for i in range(len(self.faces[0])):
-            if (i) % 3 == 0:
-                for j in range(2):
-                    print(end="\t")
-            print(self.faces[5][i], end=" ")
-            if (i + 1) % 3 == 0:
-                print()
-        print()
-        print()
+        self.printer.show()
 
     def simple_show(self):
         for face in self.faces:
