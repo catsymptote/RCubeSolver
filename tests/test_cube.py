@@ -1,8 +1,12 @@
 from rcube.cube import Cube
 from rcube.block import Block
+from rcube.settings import Settings
+
 
 
 def test_cube():
+    Settings.use_BLD_notation = False
+
     c = Cube()
 
     assert type(c) is Cube
@@ -22,6 +26,8 @@ def test_list_equality():
 
 
 def test_get_block():
+    Settings.use_BLD_notation = False
+
     c = Cube()
     a = c.get_block("A")
     b = c.get_block("B")

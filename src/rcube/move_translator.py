@@ -1,43 +1,52 @@
+import copy
+
+
 class MoveTranslator:
     def __init__(self):
         self.lookup = {
             # Single slices
-            # 'U': ['U'],  # Don't include here
-            "D": ["X2", "U", "X2"],
-            "R": ["Z_", "U", "Z"],
-            "L": ["Z", "U", "Z_"],
-            "F": ["X", "U", "X_"],
-            "B": ["X_", "U", "X"],
+            'U': ['U'],
+            'D': ['X', 'X', 'U', 'X', 'X'],
+            'R': ['Z', 'Z', 'Z', 'U', 'Z'],
+            'L': ['Z', 'U', 'Z', 'Z', 'Z'],
+            'F': ['X', 'U', 'X', 'X', 'X'],
+            'B': ['X', 'X', 'X', 'U', 'X'],
+
             # Mid-slices
-            # 'E': ['E'],  # Don't include here
-            "M": ["Z_", "E", "Z"],
-            "S": ["X", "E", "X_"],
+            'E': ['E'],
+            'M': ['Z', 'Z', 'Z', 'E', 'Z'],
+            'S': ['X', 'X', 'X', 'E', 'X'],
+
             # Double slices
-            "u": ["U", "E_"],
-            "d": ["D", "E"],  # or the other way around? (E and E_.)
-            "r": ["R", "M_"],
-            "l": ["L", "M"],
-            "f": ["F", "S"],
-            "b": ["B", "S_"],
+            'u': ['U', 'E', 'E', 'E'],
+            'd': ['D', 'E'],  # or the other way around? (E and E_.)
+            'r': ['R', 'M', 'M', 'M'],
+            'l': ['L', 'M'],
+            'f': ['F', 'S'],
+            'b': ['B', 'S', 'S', 'S'],
         }
 
+    def get_count(self, move):
+        assert len(move) in [1, 2]
+
+        if len(move) == 1:
+            return 1
+        if move[1] == '2':
+            return 2
+        return 3
+
     def translate(self, moves: list[str]) -> list[str]:
-        base_moves = "XYZUE"
+        moves = copy.copy(moves)
+
         index = 0
         while index < len(moves):
             move = moves[index]
 
-            # Base case, no translation needed.
-            if move[0] in base_moves:
-                index += 1
-                continue
-
             # Move translation
-            insert_moves = self.lookup.get(move, None)
-            if insert_moves:
-                moves[index : index + 1] = insert_moves[:]
-                index += len(insert_moves)
-                continue
+            base_move = move[0]
+            insert_moves = self.lookup[base_move] * self.get_count(move)
+            moves[index : index + 1] = insert_moves[:]
+            index += len(insert_moves)
+            continue
 
-            index += 1
         return moves

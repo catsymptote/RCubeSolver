@@ -30,7 +30,7 @@ class Cube:
                 ['i', 'I', 'j', 'L', '3', 'J', 'l', 'K', 'k'],
                 ['m', 'M', 'm', 'P', '4', 'N', 'p', 'O', 'o'],
                 ['q', 'Q', 'r', 'T', '5', 'R', 't', 'S', 's'],
-                ['u', 'U', 'u', 'X', '6', 'V', 'x', 'W', 'w']
+                ['u', 'U', 'v', 'X', '6', 'V', 'x', 'W', 'w']
             ]
         else:
             self.faces = [
@@ -279,3 +279,10 @@ class Cube:
         face[8] = tmpList[0]
         """
         return face
+
+    def get_sticker(self, x: int, y: int) -> str:
+        sticker = self.faces[x][y]
+        return sticker
+
+    def __getitem__(self, x: int, y: int) -> str:
+        return self.get_sticker(x, y)

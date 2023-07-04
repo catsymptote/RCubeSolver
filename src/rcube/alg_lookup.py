@@ -30,3 +30,10 @@ class AlgLookup:
 
     def get_list(self, alg: str) -> list[str]:
         return self.list_lookup[alg]
+
+
+if __name__ == "__main__":
+    import sys
+    inp = sys.argv
+    al = AlgLookup()
+    print(al.convert(sys.argv[1]))

@@ -27,6 +27,7 @@ class PochmannTranslator:
             "C": ([], "Jb"),
             "D": ([], "T"),
             "E": (["L", "D'", "L"], "T"),
+            '-': ...  # Edge parity
         }
 
     def single_invert(self, move):

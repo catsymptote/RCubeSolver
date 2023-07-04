@@ -1,5 +1,5 @@
 Y = 'aAbD1BdCc'
-O = 'eEfH2FhGg'
+O = 'eEfH2FhGg'  # noqa
 B = 'iIjL3JlKk'
 R = 'mMmP4NpOo'
 G = 'qQrT5RtSs'

@@ -1,5 +1,12 @@
 # Rubik's Cube Solver
 
+## Status
+[Title](https://jperm.net/3x3/moves)
+
+Almost working now, but some issues with:
+1. Applying moves. "R'" seems to not work, among other things.
+2. M-edge in buffer seems to break the solving.
+
 ## Move Notation
 
 [Rubik's cube notation](https://ruwix.com/the-rubiks-cube/notation/)
@@ -38,9 +45,9 @@
 
 | Notation |  Description |  Exp Notation | Base? |
 | -------- | ------------ | ------------- | ----- |
-| X        | Up           |               | x\*   |
-| Y        | Right        |               | x\*   |
-| Z        | Front        |               | x\*   |
+| X        | With D           |               | x\*   |
+| Y        | With L        |               | x\*   |
+| Z        | With F        |               | x\*   |
 
 \* Though one of these can be swapped out with a of the others, so we'd really only need two of them.
 

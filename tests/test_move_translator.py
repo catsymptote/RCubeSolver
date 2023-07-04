@@ -1,10 +1,25 @@
+import pytest
+
 from rcube.move_translator import MoveTranslator
 
 
 def test_init():
     mt = MoveTranslator()
     moves = ["M", "R"]
-    expected = ["Z_", "E", "Z", "Z_", "U", "Z"]
+    expected = ["Z", "Z", "Z", "E", "Z", "Z", "Z", "Z", "U", "Z"]
     result = mt.translate(moves)
     assert result == expected, f"{expected}\n{result}"
     print("Success!")
+
+
+@pytest.mark.parametrize('moves, exp_moves', [
+    (['U'], ['U']),
+    (['D'], ['X', 'X', 'U', 'X', 'X']),
+    (['R', 'U'], ['Z', 'Z', 'Z', 'U', 'Z', 'U']),
+    (['L', 'F2'], ['Z', 'U', 'Z', 'Z', 'Z', 'X', 'U', 'X', 'X', 'X', 'X', 'U', 'X', 'X', 'X']),
+    (["U'"], ['U', 'U', 'U']),
+
+])
+def test_translate(moves, exp_moves):
+    mt = MoveTranslator()
+    assert mt.translate(moves) == exp_moves

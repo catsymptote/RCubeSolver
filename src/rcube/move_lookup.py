@@ -12,7 +12,7 @@ class MoveLookup:
         valid_moves = self.moves
         if include_rotation:
             valid_moves += self.rotations
-        
+
         random_move = random.choice(valid_moves)
         random_modifier = random.choice(self.modifiers)
         random_valid_move = random_move + random_modifier
@@ -26,7 +26,7 @@ class MoveLookup:
         modifier = ""
         if len(move) == 2:
             modifier = move[1]
-    
+
         return letter in self.valid_letters and modifier in self.modifiers
 
 
