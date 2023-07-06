@@ -24,7 +24,7 @@ class MoveTranslator:
             'E': ['E'],
             'M': ['Z', 'Z', 'Z', 'E', 'Z'],
             'S': ['Y', 'E', 'Y', 'Y', 'Y'],
-            
+
             # Rotations
             'X': ['X'],
             'Y': ['Y'],

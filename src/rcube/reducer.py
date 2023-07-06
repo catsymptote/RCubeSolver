@@ -52,7 +52,7 @@ class Reducer:
                 if new_move is not None:  # Check if move is not None.
                     new_moves.append(new_move)
                     changed_last_loop = True
-            
+
             # If no reduction possible, append move.
             else:
                 new_moves.append(move1)

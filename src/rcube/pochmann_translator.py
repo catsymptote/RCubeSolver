@@ -21,9 +21,9 @@ from rcube.alg_lookup import AlgLookup
 class PochmannTranslator:
     def __init__(self):
         self.alg_lookup = AlgLookup()
-        self.setup_moves = {
+        self.setup_moves: dict[str, tuple[list[str], str]] = {
             "A": ([], "Ja"),
-            "B": ([], None),
+            "B": ([], ""),
             "C": ([], "Jb"),
             "D": ([], "T"),
             "E": (["L", "E'", "L"], "T"),
@@ -34,7 +34,7 @@ class PochmannTranslator:
             "J": (["E2", "L"], "T"),
             "K": (["M'"], "Jb"),
             "L": (["L'"], "T"),
-            "M": ([], None),
+            "M": ([], ""),
             "N": (["E", "L"], "T"),
             "O": (["D'", "M'"], "Jb"),
             "P": (["E'", "L'"], "T"),
@@ -47,11 +47,11 @@ class PochmannTranslator:
             "W": (["D", "L2"], "T"),
             "X": (["L2"], "T"),
             "-": ([], "Ra"),  # Edge parity
-            "a": ([], None),
+            "a": ([], ""),
             "b": (["R", "D'"], "Yb"),
             "c": (["F"], "Yb"),
             "d": (["F", "R'"], "Yb"),
-            "e": ([""], None),
+            "e": ([""], ""),
             "f": (["F2"], "Yb"),
             "g": (["D2", "R"], "Yb"),
             "h": (["D2"], "Yb"),
@@ -64,7 +64,7 @@ class PochmannTranslator:
             "o": (["R"], "Yb"),
             "p": ([], "Yb"),
             "q": (["R'", "F"], "Yb"),
-            "r": ([""], None),
+            "r": ([""], ""),
             "s": (["D'", "R"], "Yb"),
             "t": (["D'"], "Yb"),
             "u": (["F'"], "Yb"),
@@ -86,7 +86,7 @@ class PochmannTranslator:
         inverted_moves = [self.single_invert(m) for m in inverted_moves]
         return inverted_moves
 
-    def translate(self, letter):
+    def translate(self, letter: str) -> list[str]:
         setup, alg = self.setup_moves[letter]
         teardown = self.invert(setup)
 

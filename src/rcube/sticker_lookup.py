@@ -11,22 +11,22 @@ class StickerLookup:
 
     def get_color_index(self, sticker):
         for col, items in self.lookup_table.items():
-            if sticker in items["stickers"]:
+            if sticker in items["stickers"]:  # type: ignore
                 return col
         raise KeyError(f"Invalid sticker: {sticker}")
 
-    def get_list_idx(self, sticker: str) -> str:
+    def get_list_idx(self, sticker: str) -> int:
         for _, items in self.lookup_table.items():
-            if sticker in items["stickers"]:
-                return items["list_index"]
+            if sticker in items["stickers"]:  # type: ignore
+                return items["list_index"]  # type: ignore
         raise KeyError(f"Invalid sticker: {sticker}")
 
     def get_xy(self, sticker: str) -> tuple[int, int]:
         for _, items in self.lookup_table.items():
-            if sticker in items["stickers"]:
+            if sticker in items["stickers"]:  # type: ignore
                 x_index = items["list_index"]
-                y_index = items["stickers"].index(sticker)
-                return (x_index, y_index)
+                y_index = items["stickers"].index(sticker)  # type: ignore
+                return (x_index, y_index)  # type: ignore
         raise KeyError(f"Invalid sticker: {sticker}")
 
     def __getitem__(self, sticker: str):

@@ -48,14 +48,14 @@ class PochmannSolver:
 
         return False
 
-    def get_next_shot_setup(self, shots: list[str], corner: bool) -> tuple:
+    def get_next_shot_setup(self, shots: list[str], corner: bool) \
+            -> tuple[str, str, str]:
         buffer = 'a' if corner else 'B'
 
         poss_shots = 'bcdefghijklmnopqrstuvw' if corner \
             else 'ACDEFGHIJKLMNOPQRSTUVWX'
 
         if (len(shots) == 0) or (corner and shots[-1].isupper()):
-            # current_buffer = self.cube[buffer]
             current_buffer = self.cube[buffer]
         else:
             current_buffer = self.cube[shots[-1][0]]
@@ -65,10 +65,8 @@ class PochmannSolver:
     def get_next_shot(self, shots: list[str], corner: bool) -> str | None:
         poss_shots, buffer, current_buffer \
             = self.get_next_shot_setup(shots, corner)
-        # print(poss_shots, buffer, current_buffer)
 
         # Take the shot.
-        # if current_buffer != buffer and not self.shot_finished(current_buffer, shots):  # noqa: E501
         if not self.is_same_piece(current_buffer, buffer) and \
                 not self.shot_finished(current_buffer, shots):
             return current_buffer
@@ -81,22 +79,8 @@ class PochmannSolver:
 
         return None
 
-        next_shot = self.cube[current_buffer]
-        if next_shot == buffer:
-            # Find next shot if current shot is in buffer.
-            for shot in poss_shots:
-                if shot not in shots:
-                    next_shot = shot
-                    break
-
-        if buffer == next_shot:
-            next_shot = None
-
-        # Return None if the edges/corners are solved.
-        return next_shot
-
     def get_pochmann_shots(self) -> list[str]:
-        shots = []
+        shots: list[str] = []
         parity_index = None
 
         # Edges
@@ -122,17 +106,17 @@ class PochmannSolver:
         shots = [shot[0] for shot in shots]
         return shots
 
-    def pochmann_shots_to_algs(self, shots: list[str]) -> list[str]:
-        algs = []
+    def pochmann_shots_to_algs(self, shots: list[str]) -> list[list[str]]:
+        algs: list[list[str]] = []
         for letter in shots:
             alg = self.translator.translate(letter)
             algs.append(alg)
         return algs
 
-    def algs_to_moves(self, algs: list[str]) -> list[str]:
-        moves = []
+    def algs_to_moves(self, algs: list[list[str]]) -> list[str]:
+        moves: list[str] = []
         for alg in algs:
-            alg_moves = self.alg_lookup.convert(alg)
+            alg_moves: list[str] = self.alg_lookup.convert(alg)
             moves += alg_moves
         return moves
 
@@ -150,7 +134,7 @@ class PochmannSolver:
 
 if __name__ == '__main__':
     '''
-    for scramble in [['U'], ['R'], ['F'], ['D'], ['L'], ['B'], 
+    for scramble in [['U'], ['R'], ['F'], ['D'], ['L'], ['B'],
                      ['U2'], ["U'"], ['R', 'U'],
                      ['L', 'F2', 'R', 'U2', 'F2', "R'", 'F2', 'R', 'F2', 'D2', 'F2', "D'", "R'", "B'", 'U2', "L'", "B'", 'U2', 'R2', "U'", 'B'],  # noqa: E501
                      ['R', 'U', 'F2', 'D', 'L', 'D', 'B'],

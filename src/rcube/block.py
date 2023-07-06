@@ -1,7 +1,7 @@
 class Block:
     letter_code = {"YOG": "A", "YGR": "B", "YRB": "C", "YBO": "D"}
 
-    def __init__(self, stickers: list):
+    def __init__(self, stickers: list[str]):
         self.stickers = stickers
 
         self.block_type = None
