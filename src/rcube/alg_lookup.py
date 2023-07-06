@@ -8,9 +8,10 @@ class AlgLookup:
     def __init__(self):
         self.str_lookup: dict[str, str] = {
             "T": "(R U R' U') R' F R2 (U' R' U' R) U R' F'",
-            "Ja": "[R' U L'] U2 [R U' R' U2] [L R U']",
+            "Ja": "U' [R' U L'] U2 [R U' R' U2] [L R U'] U",
             "Jb": "[R U R' F'] [R U R' U' R' F] [R2 U' R' U']",
-            # 'Y': "[F R U' R' U' R U R' F'] [R U R' U'] [R' F R F']"
+            "Ra": "U2 L2 F' L' U' L' U L F L' U2 L U2 L' U",  # parity
+            # "Y": "[F R U' R' U' R U R' F'] [R U R' U'] [R' F R F']"
             "Yb": "[R U' R' U' R U R' F'] [R U R' U'] [R' F R]",
         }
         self.list_lookup: dict[str, list[str]] = {}
@@ -18,11 +19,13 @@ class AlgLookup:
             self.list_lookup[perm] = self.convert(alg)
 
     def convert(self, alg: str) -> list[str]:
+        if type(alg) is list:
+            alg = ' '.join(alg)
         removes = "()[]{}"
         for rem in removes:
             alg = alg.replace(rem, "")
 
-        moves = alg.split()
+        moves = alg.split(' ')
         return moves
 
     def get_str(self, alg: str) -> str:

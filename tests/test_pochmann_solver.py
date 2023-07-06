@@ -2,6 +2,7 @@ import pytest
 
 from rcube.pochmann_solver import PochmannSolver
 from rcube.cube_interface import CubeInterface
+from rcube.scrambler import Scrambler
 
 
 def get_ps(scramble=None):
@@ -124,3 +125,13 @@ def test_get_next_shot(scramble, shots, corner, exp_next_shot):
 def test_get_pochmann_shots(scramble, exp_solution):
     ps = get_ps(scramble)
     assert ps.get_pochmann_shots() == exp_solution
+
+
+def test_get_solution():
+    scrambler = Scrambler()
+    scramble = scrambler.get_scramble()
+    ps = get_ps(scramble)
+    assert not ps.cube.is_complete()
+    solution = ps.get_solution()
+    ps.cube.apply_moves(solution['moves'])
+    assert ps.cube.is_complete()

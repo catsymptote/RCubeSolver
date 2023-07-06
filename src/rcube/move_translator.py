@@ -12,11 +12,6 @@ class MoveTranslator:
             'F': ['Y', 'Y', 'Y', 'U', 'Y'],
             'B': ['Y' , 'U', 'Y', 'Y', 'Y'],
 
-            # Mid-slices
-            'E': ['E'],
-            'M': ['Z', 'Z', 'Z', 'E', 'Z'],
-            'S': ['Y', 'E', 'Y', 'Y', 'Y'],
-
             # Double slices
             'u': ['U', 'E', 'E', 'E'],
             'd': ['D', 'E'],  # or the other way around? (E and E_.)
@@ -24,6 +19,16 @@ class MoveTranslator:
             'l': ['L', 'M'],
             'f': ['F', 'S'],
             'b': ['B', 'S', 'S', 'S'],
+
+            # Mid-slices
+            'E': ['E'],
+            'M': ['Z', 'Z', 'Z', 'E', 'Z'],
+            'S': ['Y', 'E', 'Y', 'Y', 'Y'],
+            
+            # Rotations
+            'X': ['X'],
+            'Y': ['Y'],
+            'Z': ['Z']
         }
 
     def get_count(self, move):
@@ -45,10 +50,22 @@ class MoveTranslator:
             move = moves[index]
 
             # Move translation
-            base_move = move[0]
-            insert_moves = self.lookup[base_move] * self.get_count(move)
+            move_base = move[0]
+            insert_moves = self.lookup[move_base] * self.get_count(move)
             moves[index : index + 1] = insert_moves[:]
             index += len(insert_moves)
             continue
 
+        iter2_moves = []
+        for move in moves:
+            if len(move) != 1:
+                assert False, f'{move}'
+            if move not in 'XYZUE':
+                sub_iter2_moves = self.translate([move])
+                iter2_moves += sub_iter2_moves
+            else:
+                iter2_moves.append(move)
+        for move in iter2_moves:
+            if len(move) != 1:
+                assert False, f'{move}'
         return moves

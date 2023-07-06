@@ -6,9 +6,13 @@ from rcube.sticker_lookup import StickerLookup
 
 
 class CubePrinter:
+    colorama_is_uninitialized = False
+
     def __init__(self, cube, background: bool = False):
         # Initialze colorama
-        colorama_init()
+        if CubePrinter.colorama_is_uninitialized:
+            CubePrinter.colorama_is_uninitialized = False
+            colorama_init()
 
         # Decide whether to color background or foreground
         ground = Back if background else Fore

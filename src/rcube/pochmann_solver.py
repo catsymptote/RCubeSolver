@@ -19,7 +19,7 @@ class PochmannSolver:
         self.cube = cube
         self.touched_buffers = {'edge': False, 'corner': False}
 
-    def get_piece_letters(self, shot):
+    def get_piece_letters(self, shot: str) -> str | None:
         pieces = (
             'AQ', 'BM', 'CI', 'DE', 'HR', 'FL', 'JP', 'NT', 'GX', 'KU', 'OV', 'SW',  # noqa: E501
             'aer', 'bqn', 'cmj', 'dif', 'hxs', 'lug', 'pvk', 'two'
@@ -29,12 +29,12 @@ class PochmannSolver:
                 return piece
         return None
 
-    def is_same_piece(self, sticker1, sticker2):
+    def is_same_piece(self, sticker1: str, sticker2: str) -> bool:
         piece1 = self.get_piece_letters(sticker1)
         piece2 = self.get_piece_letters(sticker2)
         return piece1 == piece2
 
-    def shot_finished(self, shot, shots):
+    def shot_finished(self, shot: str, shots: list[str]) -> bool:
         # Find flag (*).
         for index, existing_shot in enumerate(shots[:-2]):
             if shot == existing_shot and '*' in existing_shot:
@@ -48,7 +48,7 @@ class PochmannSolver:
 
         return False
 
-    def get_next_shot_setup(self, shots, corner: bool):
+    def get_next_shot_setup(self, shots: list[str], corner: bool) -> tuple:
         buffer = 'a' if corner else 'B'
 
         poss_shots = 'bcdefghijklmnopqrstuvw' if corner \
@@ -62,7 +62,7 @@ class PochmannSolver:
 
         return poss_shots, buffer, current_buffer
 
-    def get_next_shot(self, shots, corner: bool):
+    def get_next_shot(self, shots: list[str], corner: bool) -> str | None:
         poss_shots, buffer, current_buffer \
             = self.get_next_shot_setup(shots, corner)
         # print(poss_shots, buffer, current_buffer)
@@ -95,7 +95,7 @@ class PochmannSolver:
         # Return None if the edges/corners are solved.
         return next_shot
 
-    def get_pochmann_shots(self):
+    def get_pochmann_shots(self) -> list[str]:
         shots = []
         parity_index = None
 
@@ -122,25 +122,34 @@ class PochmannSolver:
         shots = [shot[0] for shot in shots]
         return shots
 
-    def pochmann_shots_to_algs(self, shots):
+    def pochmann_shots_to_algs(self, shots: list[str]) -> list[str]:
         algs = []
         for letter in shots:
-            if letter == '-':
-                # parity
-                pass
+            alg = self.translator.translate(letter)
+            algs.append(alg)
         return algs
 
-    def algs_to_moves(self, algs):
-        return algs
+    def algs_to_moves(self, algs: list[str]) -> list[str]:
+        moves = []
+        for alg in algs:
+            alg_moves = self.alg_lookup.convert(alg)
+            moves += alg_moves
+        return moves
 
     def get_solution(self):
         shots = self.get_pochmann_shots()
         algs = self.pochmann_shots_to_algs(shots)
         moves = self.algs_to_moves(algs)
-        return moves
+        solution = {
+            'shots': shots,
+            'algs': algs,
+            'moves': moves
+        }
+        return solution
 
 
 if __name__ == '__main__':
+    '''
     for scramble in [['U'], ['R'], ['F'], ['D'], ['L'], ['B'], 
                      ['U2'], ["U'"], ['R', 'U'],
                      ['L', 'F2', 'R', 'U2', 'F2', "R'", 'F2', 'R', 'F2', 'D2', 'F2', "D'", "R'", "B'", 'U2', "L'", "B'", 'U2', 'R2', "U'", 'B'],  # noqa: E501
@@ -150,3 +159,29 @@ if __name__ == '__main__':
         cube.apply_moves(scramble)
         ps = PochmannSolver(cube)
         print(scramble, '\t', ps.get_pochmann_shots())
+    '''
+    from rcube.scrambler import Scrambler
+
+    cube = CubeInterface()
+    cube.show()
+    assert cube.is_complete()
+
+    scramble = Scrambler().get_scramble()
+    # scramble = ['U']
+    print(scramble)
+    cube.apply_moves(scramble)
+    cube.show()
+    assert not cube.is_complete()
+
+    ps = PochmannSolver(cube)
+    solution = ps.get_solution()
+    print(solution['shots'])
+    # print(solution['algs'])
+    # print(solution['moves'])
+
+    cube.apply_moves(solution['moves'])
+    cube.show()
+    assert cube.is_complete()
+
+    from rcube.logger import Logger
+    print(Logger.base_moves)

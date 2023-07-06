@@ -3,8 +3,8 @@ import random
 
 class MoveLookup:
     def __init__(self):
-        self.moves = 'URFDLB' + 'EMS' + 'urfdlb'
-        self.rotations = 'XYZ'
+        self.moves = 'URFDLB'
+        self.rotations = 'EMS' + 'urfdlb' + 'XYZ'
         self.valid_letters = self.moves + self.rotations
         self.modifiers = ["", "2", "'"]
 

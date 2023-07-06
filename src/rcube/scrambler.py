@@ -10,6 +10,10 @@ class Scrambler:
         self.move_lookup = MoveLookup()
 
     def scramble(self, number=20) -> CubeInterface:
-        moves = [self.move_lookup.get_random_move() for _ in range(number)]
+        moves = self.get_scramble(number)
         self.cube.apply_moves(moves)
         return self.cube
+
+    def get_scramble(self, number=20):
+        moves = [self.move_lookup.get_random_move() for _ in range(number)]
+        return moves

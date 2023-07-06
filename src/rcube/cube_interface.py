@@ -3,6 +3,8 @@ from rcube.move_translator import MoveTranslator
 from rcube.move_lookup import MoveLookup
 from rcube.sticker_lookup import StickerLookup
 
+from rcube.logger import Logger
+
 
 class CubeInterface:
     def __init__(self, cube=None):
@@ -18,6 +20,7 @@ class CubeInterface:
         '''Only accepts a base move:
             X, Y, Z, U, E
         '''
+        Logger.base_moves[base_move] += 1
 
         # Perform move
         # Cube rotations

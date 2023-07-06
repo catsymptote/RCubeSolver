@@ -12,6 +12,20 @@ def test_init():
     print("Success!")
 
 
+def test_symmetry():
+    mt = MoveTranslator()
+    for k, v in mt.lookup.items():
+        rotations = 'XYZ'
+        for rotation in rotations:
+            if k != rotation:
+                assert v.count(rotation) % 4 == 0
+
+        midslices = 'EMS'
+        for midslice in midslices:
+            if k.isupper() and k not in midslices:
+                assert v.count(midslice) % 4 == 0
+
+
 @pytest.mark.parametrize('moves, exp_moves', [
     (['U'], ['U']),
     (['D'], ['Z', 'Z', 'U', 'Z', 'Z']),
