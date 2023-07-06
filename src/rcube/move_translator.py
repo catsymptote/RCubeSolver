@@ -6,16 +6,16 @@ class MoveTranslator:
         self.lookup = {
             # Single slices
             'U': ['U'],
-            'D': ['X', 'X', 'U', 'X', 'X'],
+            'D': ['Z', 'Z', 'U', 'Z', 'Z'],
             'R': ['Z', 'Z', 'Z', 'U', 'Z'],
             'L': ['Z', 'U', 'Z', 'Z', 'Z'],
-            'F': ['X', 'U', 'X', 'X', 'X'],
-            'B': ['X', 'X', 'X', 'U', 'X'],
+            'F': ['Y', 'Y', 'Y', 'U', 'Y'],
+            'B': ['Y' , 'U', 'Y', 'Y', 'Y'],
 
             # Mid-slices
             'E': ['E'],
             'M': ['Z', 'Z', 'Z', 'E', 'Z'],
-            'S': ['X', 'X', 'X', 'E', 'X'],
+            'S': ['Y', 'E', 'Y', 'Y', 'Y'],
 
             # Double slices
             'u': ['U', 'E', 'E', 'E'],
@@ -33,7 +33,9 @@ class MoveTranslator:
             return 1
         if move[1] == '2':
             return 2
-        return 3
+        if move[1] == "'":
+            return 3
+        raise ValueError(f'Invalid move or move modifier: {move}')
 
     def translate(self, moves: list[str]) -> list[str]:
         moves = copy.copy(moves)

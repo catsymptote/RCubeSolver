@@ -37,7 +37,7 @@ class PochmannSolver:
     def shot_finished(self, shot, shots):
         # Find flag (*).
         for index, existing_shot in enumerate(shots[:-2]):
-            if '*' in existing_shot:
+            if shot == existing_shot and '*' in existing_shot:
                 shots[index] = existing_shot[0]
                 break
 
@@ -141,9 +141,11 @@ class PochmannSolver:
 
 
 if __name__ == '__main__':
-    for scramble in [['U'], ['U2'], ["U'"], ['R', 'U'],
+    for scramble in [['U'], ['R'], ['F'], ['D'], ['L'], ['B'], 
+                     ['U2'], ["U'"], ['R', 'U'],
                      ['L', 'F2', 'R', 'U2', 'F2', "R'", 'F2', 'R', 'F2', 'D2', 'F2', "D'", "R'", "B'", 'U2', "L'", "B'", 'U2', 'R2', "U'", 'B'],  # noqa: E501
-                     ['R', 'U', 'F2', 'D', 'L', 'D', 'B']]:
+                     ['R', 'U', 'F2', 'D', 'L', 'D', 'B'],
+                     ]:
         cube = CubeInterface()
         cube.apply_moves(scramble)
         ps = PochmannSolver(cube)

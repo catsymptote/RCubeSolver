@@ -31,12 +31,41 @@ class Reducer:
             elif move[1] == "2":
                 amount += 2
             else:
-                assert False, f'Should not happen. ("{move1}" and "{move2}".)'
+                raise ValueError(f'Invalid move: "{move1}" or "{move2}".')
 
         new_move = self.give_valid_amount(move1, amount)
         return new_move
 
     def reduce_by_combining(self) -> bool:
+        new_moves = []
+        changed_last_loop = True
+        for index in range(len(self.moves) - 1):
+            # Set flag and moves.
+            changed_last_loop = False
+            move1 = self.moves[index]
+            move2 = self.moves[index + 1]
+
+            # If reducable moves, combine and append new move.
+            if self.is_same_move(move1, move2):
+                new_move = self.combine_moves(move1, move2)
+                print(move1, move2, new_move)
+                if new_move is not None:  # Check if move is not None.
+                    new_moves.append(new_move)
+                    changed_last_loop = True
+            
+            # If no reduction possible, append move.
+            else:
+                new_moves.append(move1)
+
+        if not changed_last_loop:
+            new_moves += self.moves[-1:]
+
+        changed = len(new_moves) != len(self.moves)
+        self.moves = new_moves
+        print(self.moves)
+        return changed
+
+    def reduce_by_combining_old(self) -> bool:
         modified = False
         index = 0
         while index < len(self.moves) - 1:

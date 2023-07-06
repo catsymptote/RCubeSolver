@@ -14,6 +14,23 @@ def get_ps(scramble=None):
     return ps
 
 
+def to_list(scramble):
+    if type(scramble) is list:
+        return scramble
+    if scramble.count(' ') == 0 and "'" not in scramble and "2" not in scramble:
+        return list(scramble)
+    scramble = scramble.split()
+    return scramble
+
+
+def test_to_list():
+    assert to_list("U R U' R'") == ['U', 'R', "U'", "R'"]
+    assert to_list("U") == ['U']
+    assert to_list("U'") == ["U'"]
+    assert to_list(['a', 'A', 'b']) == ['a', 'A', 'b']
+    assert to_list('aAb') == ['a', 'A', 'b']
+
+
 def test_init():
     ps = get_ps()
     assert type(ps) is PochmannSolver
@@ -89,3 +106,21 @@ def test_get_next_shot(scramble, shots, corner, exp_next_shot):
     ps = get_ps(scramble)
     next_shot = ps.get_next_shot(shots, corner)
     assert next_shot == exp_next_shot
+
+
+
+@pytest.mark.parametrize('scramble, exp_solution', [
+    (to_list("U"), to_list('ADC-dcb')),
+    (to_list("R"), to_list('JVT-bjvtb')),
+    (to_list("F"), to_list('CFUPC-cfupc')),
+    (to_list("D"), to_list('GSOKG-gsokg')),
+    (to_list("L"), to_list('DRXLD-sui')),
+    (to_list("B"), to_list('ANWHA-nwh')),
+    (to_list("U2"), to_list('DACAcbdb')),
+    (to_list("U'"), to_list('CDA-bcd')),
+    (to_list("R U"), to_list('ADCJVTdkwqcj')),
+    (['L', 'F2', 'R', 'U2', 'F2', "R'", 'F2', 'R', 'F2', 'D2', 'F2', "D'", "R'", "B'", 'U2', "L'", "B'", 'U2', 'R2', "U'", 'B'], ['A', 'O', 'H', 'J', 'S', 'A', 'C', 'D', 'G', 'T', 'K', 'F', 'I', '-', 'u', 'w', 'c', 'b', 'x', 'q', 'd', 'v', 'f'])
+])
+def test_get_pochmann_shots(scramble, exp_solution):
+    ps = get_ps(scramble)
+    assert ps.get_pochmann_shots() == exp_solution

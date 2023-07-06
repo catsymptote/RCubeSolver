@@ -32,4 +32,4 @@ class MoveLookup:
 
 if __name__ == '__main__':
     ml = MoveLookup()
-    print([ml.get_move(True) for _ in range(10)])
+    print([ml.get_random_move(True) for _ in range(10)])

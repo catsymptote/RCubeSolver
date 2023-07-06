@@ -22,14 +22,6 @@ Almost working now, but some issues with:
 | L        | Left         |               |       |
 | B        | Back         |               |       |
 
-### Single inner
-
-| Notation |  Description |  Exp Notation | Base? |
-| -------- | ------------ | ------------- | ----- |
-| E        | With D       |               | x     |
-| M        | With L       |               |       |
-| S        | With F       |               |       |
-
 ### Double
 
 | Notation |  Description |  Exp Notation | Base? |
@@ -41,13 +33,21 @@ Almost working now, but some issues with:
 | l        | Left         | L + E         |       |
 | b        | Back         | B + M         |       |
 
+### Single inner
+
+| Notation |  Description |  Exp Notation | Base? |
+| -------- | ------------ | ------------- | ----- |
+| E        | With D       |               | x     |
+| M        | With L       |               |       |
+| S        | With F       |               |       |
+
 ### Rotations
 
 | Notation |  Description |  Exp Notation | Base? |
 | -------- | ------------ | ------------- | ----- |
-| X        | With D           |               | x\*   |
-| Y        | With L        |               | x\*   |
-| Z        | With F        |               | x\*   |
+| X        | With D       |               | x\*   |
+| Y        | With L       |               | x\*   |
+| Z        | With F       |               | x\*   |
 
 \* Though one of these can be swapped out with a of the others, so we'd really only need two of them.
 

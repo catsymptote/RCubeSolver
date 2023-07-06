@@ -25,12 +25,12 @@ class Cube:
 
         if self.printer.BLD_notation:
             self.faces = [
-                ['a', 'A', 'b', 'D', '1', 'B', 'd', 'C', 'c'],
-                ['e', 'E', 'f', 'H', '2', 'F', 'h', 'G', 'g'],
-                ['i', 'I', 'j', 'L', '3', 'J', 'l', 'K', 'k'],
-                ['m', 'M', 'm', 'P', '4', 'N', 'p', 'O', 'o'],
-                ['q', 'Q', 'r', 'T', '5', 'R', 't', 'S', 's'],
-                ['u', 'U', 'v', 'X', '6', 'V', 'x', 'W', 'w']
+                ['a', 'A', 'b', 'D', '0', 'B', 'd', 'C', 'c'],
+                ['e', 'E', 'f', 'H', '1', 'F', 'h', 'G', 'g'],
+                ['i', 'I', 'j', 'L', '2', 'J', 'l', 'K', 'k'],
+                ['m', 'M', 'n', 'P', '3', 'N', 'p', 'O', 'o'],
+                ['q', 'Q', 'r', 'T', '4', 'R', 't', 'S', 's'],
+                ['u', 'U', 'v', 'X', '5', 'V', 'x', 'W', 'w']
             ]
         else:
             self.faces = [
@@ -126,58 +126,58 @@ class Cube:
     """ Cube rotations """
 
     def X_cube_rotation(self):
-        # tmp << Y
-        tmp = self.faces[0]
-
-        # Y << B
-        self.faces[0] = self.faces[2]
-
-        # B << W
-        self.faces[2] = self.faces[5]
-
-        # W << G
-        self.faces[5] = self.faces[4]
-        self.faces[5] = self.face_flip(self.faces[5])
-
-        # G << Y
-        self.faces[4] = tmp
-        self.faces[4] = self.face_flip(self.faces[4])
-
-        # O rotate
-        self.faces[1] = self.face_rotation(self.faces[1])
-        self.faces[1] = self.face_rotation(self.faces[1])
-        self.faces[1] = self.face_rotation(self.faces[1])
-
-        # R rotate
-        self.faces[3] = self.face_rotation(self.faces[3])
-
-    def Y_cube_rotation(self):
         # tmp << O
         tmp = self.faces[1]
 
-        # O << B
-        self.faces[1] = self.faces[2]
+        # O << G
+        self.faces[1] = self.faces[4]
 
-        # B << R
-        self.faces[2] = self.faces[3]
+        # G << R
+        self.faces[4] = self.faces[3]
 
-        # R << G
-        self.faces[3] = self.faces[4]
+        # R << B
+        self.faces[3] = self.faces[2]
 
-        # G << tmp
-        self.faces[4] = tmp
+        # B << tmp
+        self.faces[2] = tmp
 
         # Y rotate
+        self.faces[0] = self.face_rotation(self.faces[0])
+        self.faces[0] = self.face_rotation(self.faces[0])
         self.faces[0] = self.face_rotation(self.faces[0])
 
         # W rotate
         self.faces[5] = self.face_rotation(self.faces[5])
-        self.faces[5] = self.face_rotation(self.faces[5])
-        self.faces[5] = self.face_rotation(self.faces[5])
+
+    def Y_cube_rotation(self):
+        # tmp << Y
+        tmp = copy.deepcopy(self.faces[0])
+
+        # Y << G
+        self.faces[0] = self.faces[4]
+        self.faces[0] = self.face_flip(self.faces[0])
+
+        # G << W
+        self.faces[4] = self.faces[5]
+        self.faces[4] = self.face_flip(self.faces[4])
+
+        # W << B
+        self.faces[5] = self.faces[2]
+
+        # B << tmp
+        self.faces[2] = tmp
+
+        # O rotate
+        self.faces[1] = self.face_rotation(self.faces[1])
+
+        # R rotate
+        self.faces[3] = self.face_rotation(self.faces[3])
+        self.faces[3] = self.face_rotation(self.faces[3])
+        self.faces[3] = self.face_rotation(self.faces[3])
 
     def Z_cube_rotation(self):
         # tmp << Y
-        tmp = self.faces[0]
+        tmp = copy.deepcopy(self.faces[0])
 
         # Y << O
         self.faces[0] = self.faces[1]
@@ -215,34 +215,41 @@ class Cube:
         self.outer_slice_rotation(1)
         self.outer_slice_rotation(1)
 
-    def outer_slice_rotation(self, modifier=0):
-        idx0 = 0 + modifier * 3
-        idx1 = 1 + modifier * 3
-        idx2 = 2 + modifier * 3
+    def outer_slice_rotation(self, layer=0):
+        '''
+        layer: 1, 2 or 3, where 1 is the upper layer, 2 is mid and 3 is bottom.
+        '''
+        faces = copy.deepcopy(self.faces)
 
-        tmp0 = self.faces[1][idx0]
-        tmp1 = self.faces[1][idx1]
-        tmp2 = self.faces[1][idx2]
+        idx0 = 0 + layer * 3
+        idx1 = 1 + layer * 3
+        idx2 = 2 + layer * 3
+
+        tmp0 = faces[1][idx0]
+        tmp1 = faces[1][idx1]
+        tmp2 = faces[1][idx2]
 
         # O << B
-        self.faces[1][idx0] = self.faces[2][idx0]
-        self.faces[1][idx1] = self.faces[2][idx1]
-        self.faces[1][idx2] = self.faces[2][idx2]
+        faces[1][idx0] = faces[2][idx0]
+        faces[1][idx1] = faces[2][idx1]
+        faces[1][idx2] = faces[2][idx2]
 
         # B << R
-        self.faces[2][idx0] = self.faces[3][idx0]
-        self.faces[2][idx1] = self.faces[3][idx1]
-        self.faces[2][idx2] = self.faces[3][idx2]
+        faces[2][idx0] = faces[3][idx0]
+        faces[2][idx1] = faces[3][idx1]
+        faces[2][idx2] = faces[3][idx2]
 
         # R << G
-        self.faces[3][idx0] = self.faces[4][idx0]
-        self.faces[3][idx1] = self.faces[4][idx1]
-        self.faces[3][idx2] = self.faces[4][idx2]
+        faces[3][idx0] = faces[4][idx0]
+        faces[3][idx1] = faces[4][idx1]
+        faces[3][idx2] = faces[4][idx2]
 
         # G << tmp
-        self.faces[4][idx0] = tmp0
-        self.faces[4][idx1] = tmp1
-        self.faces[4][idx2] = tmp2
+        faces[4][idx0] = tmp0
+        faces[4][idx1] = tmp1
+        faces[4][idx2] = tmp2
+
+        self.faces = faces
 
     def face_rotation(self, face):
         tmpList = face[:]
