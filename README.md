@@ -3,9 +3,10 @@
 ## Status
 [Title](https://jperm.net/3x3/moves)
 
-Almost working now, but some issues with:
-1. Applying moves. "R'" seems to not work, among other things.
-2. M-edge in buffer seems to break the solving.
+## To-do's
+Make a set of moves into a Moves class, or something similar, which inherits from a list, and can take in and out both string-formatted moves and list formattes moves. The `Algorithm` class is an early prototype of this. Continue there.
+
+Printing should convert to string. Repr could be str(list)?
 
 ## Move Notation
 
@@ -50,6 +51,14 @@ Almost working now, but some issues with:
 | Z        | With F       |               | x\*   |
 
 \* Though one of these can be swapped out with a of the others, so we'd really only need two of them.
+
+### Base moves
+A few of the moves are dirrectley implemented into the `Cube` class, and is therefore a *base move*. Most of them, however, are simply composite moves. A `U`, being a base move, is performed directley. An `R` is, however, not a base move, and is therefore not performed directly. It is rather converted/translated into a set of the base moves. In this case, `R` $\rightarrow$ `Z' U Z`.
+Though as `Z'` is also not part of the base moves, it further translated into `Z Z Z`. Thus, a simple `R` is translated into:
+
+`R` $\rightarrow$ `Z Z Z U Z`
+
+Performing all these extra moves is of course very inefficient. A solution to make this move efficient is to hardcode more base moves, or to implement a more efficient and more generalized solution. Is this possible? Maybe.
 
 
 ## Algorithm notation

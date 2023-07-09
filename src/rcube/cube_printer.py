@@ -43,6 +43,8 @@ class CubePrinter:
         print(f'{color}{sticker}{Style.RESET_ALL}', end=addon)
 
     def show(self):
+        print()
+
         for i in range(len(self.cube.faces[0])):
             if (i) % 3 == 0:
                 for j in range(1):
@@ -70,5 +72,4 @@ class CubePrinter:
             self.print_sticker(sticker)
             if (i + 1) % 3 == 0:
                 print()
-        print()
         print()

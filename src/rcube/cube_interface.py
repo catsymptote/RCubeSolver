@@ -38,6 +38,7 @@ class CubeInterface:
             self.cube.E_slice_rotation()
 
     def apply_moves(self, moves):
+        Logger().log_moves(moves)
         base_moves = self.translator.translate(moves)
         for base_move in base_moves:
             self.apply_base_move(base_move)

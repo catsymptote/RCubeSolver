@@ -23,12 +23,15 @@ def main():
     ps = PochmannSolver(cube)
     solution = ps.get_solution()
     print(f'OP shots: {solution["shots"]}')
+    print(f'Number of moves: {len(solution["moves"])}')
+    print(f'Moves: {" ".join(solution["moves"])}')
 
     cube.apply_moves(solution['moves'])
     cube.show()
     assert cube.is_complete()
 
     print(Logger.base_moves)
+    # print(Logger().print_moves())
 
 
 if __name__ == '__main__':
