@@ -8,6 +8,11 @@ Make a set of moves into a Moves class, or something similar, which inherits fro
 
 Printing should convert to string. Repr could be str(list)?
 
+Reduce unnecessary moves from algs. E.g., "R U U" can be recuded to "R". This should also be applied to the scrambler. Though it should keep the right amount of scramble moves. So add moves until the recudes version is $N$ moves long.
+
+Stop if solved-addition to the solver. With the scramble "U", the simplest solution is "U'". The solvers solution is 111 moves long, starting with "U' R' ...". If it stopped when solved, it would just stop after the first move. This method will probably be slow, as it would have to check if solved $N$ times for $N$ moves, and rarely actually optimize. Therefore it could be added to a set of slow-optimizers. Maybe split into fast and slow? Not sure.
+
+
 ## Move Notation
 
 [Rubik's cube notation](https://ruwix.com/the-rubiks-cube/notation/)
