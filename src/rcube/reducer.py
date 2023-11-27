@@ -99,7 +99,11 @@ class Reducer:
         return modified
 
     def reduce(self):
-        reduction_functions = [self.reduce_by_undoing, self.reduce_by_combining]
+        reduction_functions = [
+            self.reduce_by_undoing,
+            self.reduce_by_combining
+        ]
+
         flag = True
         while flag:
             flag = False

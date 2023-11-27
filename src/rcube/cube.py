@@ -49,10 +49,10 @@ class Cube:
         the same values, but not necessarily in order."""
         a = sorted(a)
         b = sorted(b)
-        if len(a) != len(b) or type(a) != type(b):
+        if len(a) != len(b) or type(a) is not type(b):
             return False
         for i in range(len(a)):
-            if a[i] != b[i] or type(a) != type(b):
+            if a[i] != b[i] or type(a) is not type(b):
                 return False
         return True
 
