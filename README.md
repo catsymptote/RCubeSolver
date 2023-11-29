@@ -12,6 +12,10 @@ Reduce unnecessary moves from algs. E.g., "R U U" can be recuded to "R". This sh
 
 Stop if solved-addition to the solver. With the scramble "U", the simplest solution is "U'". The solvers solution is 111 moves long, starting with "U' R' ...". If it stopped when solved, it would just stop after the first move. This method will probably be slow, as it would have to check if solved $N$ times for $N$ moves, and rarely actually optimize. Therefore it could be added to a set of slow-optimizers. Maybe split into fast and slow? Not sure.
 
+Make a move rotator. If an algorithm does X ... X', then "..." can be rotated with X, and X dropped.
+
+Make a move length comparator. How effective are the different reducers? Compare. Do sciece. Maybe make into a separate sub-project?
+
 
 ## Move Notation
 
