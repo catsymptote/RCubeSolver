@@ -19,6 +19,10 @@ class PochmannSolver:
         self.cube = cube
         self.touched_buffers = {'edge': False, 'corner': False}
 
+        self.shots = None
+        self.algs = None
+        self.moves = None
+
     def get_piece_letters(self, shot: str) -> str | None:
         pieces = (
             'AQ', 'BM', 'CI', 'DE', 'HR', 'FL', 'JP', 'NT', 'GX', 'KU', 'OV', 'SW',  # noqa: E501
@@ -121,15 +125,23 @@ class PochmannSolver:
         return moves
 
     def get_solution(self):
-        shots = self.get_pochmann_shots()
-        algs = self.pochmann_shots_to_algs(shots)
-        moves = self.algs_to_moves(algs)
+        self.shots = self.get_pochmann_shots()
+        self.algs = self.pochmann_shots_to_algs(self.shots)
+        self.moves = self.algs_to_moves(self.algs)
         solution = {
-            'shots': shots,
-            'algs': algs,
-            'moves': moves
+            'shots': self.shots,
+            'algs': self.algs,
+            'moves': self.moves
         }
         return solution
+
+    def get_stats(self):
+        return {
+            'len_shots': len(self.shots),
+            'shots': self.shots,
+            'len_moves': len(self.moves),
+            'moves': self.moves
+        }
 
 
 if __name__ == '__main__':
