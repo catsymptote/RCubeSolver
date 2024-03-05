@@ -11,16 +11,16 @@ def main():
         scramble = sys.argv[1].split()
     else:
         scramble = Scrambler().get_scramble()
-    
 
+    # Set up cube (cubeInterface)
     cube = CubeInterface()
     assert cube.is_complete()
 
     cube.apply_moves(scramble)
-    
+
     assert not cube.is_complete()
 
-    # If shots only
+    # Only-print-shots mode
     if len(sys.argv) > 1 and sys.argv[1] == "shots":
         ps = PochmannSolver(cube)
         solution = ps.get_solution()
@@ -32,6 +32,7 @@ def main():
         print(f'Scramble: {scramble}')
         cube.show()
 
+    # Find solution
     ps = PochmannSolver(cube)
     solution = ps.get_solution()
     stats = ps.get_stats()
@@ -40,6 +41,7 @@ def main():
     print(f'Number of moves: {len(solution["moves"])}')
     print(f'Moves: {" ".join(solution["moves"])}')
 
+    # Solve
     cube.apply_moves(solution['moves'])
     cube.show()
     assert cube.is_complete()

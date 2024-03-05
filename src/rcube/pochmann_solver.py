@@ -19,9 +19,9 @@ class PochmannSolver:
         self.cube = cube
         self.touched_buffers = {'edge': False, 'corner': False}
 
-        self.shots = None
-        self.algs = None
-        self.moves = None
+        # self.shots = None
+        # self.algs = None
+        # self.moves = None
 
     def get_piece_letters(self, shot: str) -> str | None:
         pieces = (
