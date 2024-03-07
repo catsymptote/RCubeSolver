@@ -37,16 +37,17 @@ def main():
     solution = ps.get_solution()
     stats = ps.get_stats()
     print(f'Number of shots: {stats["len_shots"]}')
-    print(f'OP shots: {solution["shots"]}')
     print(f'Number of moves: {len(solution["moves"])}')
-    print(f'Moves: {" ".join(solution["moves"])}')
+    print()
+    print(f'OP shots: {solution["shots"]}')
+    # print(f'Moves: {" ".join(solution["moves"])}')
+    print(Logger.base_moves)
 
     # Solve
     cube.apply_moves(solution['moves'])
     cube.show()
     assert cube.is_complete()
 
-    print(Logger.base_moves)
     # print(Logger().print_moves())
 
 
