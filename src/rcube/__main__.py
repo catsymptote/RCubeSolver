@@ -40,9 +40,6 @@ def main():
         sys.argv.remove('doprint')
         do_print = False
 
-
-    
-
     if len(sys.argv) > 1 and sys.argv[1] != 'shots':
         scramble = sys.argv[1].split()
     else:
