@@ -36,9 +36,14 @@ def main():
         sys.exit(0)
 
     do_print = True
-    if 'doprint' in sys.argv:
-        sys.argv.remove('doprint')
+    if 'noprint' in sys.argv:
+        sys.argv.remove('noprint')
         do_print = False
+
+    print_moves = False
+    if 'printmoves' in sys.argv:
+        sys.argv.remove('printmoves')
+        print_moves = True
 
     if len(sys.argv) > 1 and sys.argv[1] != 'shots':
         scramble = sys.argv[1].split()
@@ -76,7 +81,9 @@ def main():
         print(f'Number of moves: {len(solution["moves"])}')
         print()
         print(f'OP shots: {solution["shots"]}')
-        # print(f'Moves: {" ".join(solution["moves"])}')
+
+        if print_moves:
+            print(f'Moves: {" ".join(solution["moves"])}')
         print(Logger.base_moves)
 
     # Solve
